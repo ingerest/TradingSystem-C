@@ -1,4 +1,6 @@
 #include "gmock/gmock.h"
+#include "AutoTrader.cpp"
+#include "StockBroker.cpp"
 
 #include <sstream>
 #include <iostream>
