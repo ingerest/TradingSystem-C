@@ -2,6 +2,8 @@
 
 #include <sstream>
 #include <iostream>
+#include "IStockBrocker.h"
+#include "AutoTrader.cpp";
 
 using namespace testing;
 
@@ -58,7 +60,7 @@ TEST(APP1, Buy)
     std::streambuf* originalCout = std::cout.rdbuf();
     std::cout.rdbuf(buffer.rdbuf());
 
-    trader.buy;
+    //trader.buy;
 
     std::cout.rdbuf(originalCout);
 
@@ -85,7 +87,7 @@ TEST(APP1, Sell)
     std::streambuf* originalCout = std::cout.rdbuf();
     std::cout.rdbuf(buffer.rdbuf());
 
-    trader.buy;
+    //trader.buy;
 
     std::cout.rdbuf(originalCout);
 

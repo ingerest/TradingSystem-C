@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\.gitignore" />
+    <None Include="..\README.md" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoTrader.cpp" />
+    <ClCompile Include="KiwerAPI.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NemoAPI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IStockBrocker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
