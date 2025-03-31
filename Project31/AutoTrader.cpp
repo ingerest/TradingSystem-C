@@ -24,6 +24,10 @@ public:
 	{
 		return m_pStockBrocker->getPrice(stockCode);
 	}
+	void sellNiceTiming(const std::string& stockCode, int count) {
+
+
+	}
 
 private:
 	IStockBrocker* m_pStockBrocker = nullptr;
