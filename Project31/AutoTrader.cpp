@@ -1,4 +1,3 @@
-
 #include "IStockBrocker.h"
 
 class AutoTrader
