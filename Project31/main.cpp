@@ -115,6 +115,76 @@ TEST(APP1, getPrice)
     EXPECT_EQ(price, expectedPrice);
 }
 
+TEST(APP2, BuyNiceTiming_Success) {
+    MockStockBrocker mockBrocker;
+    AutoTrader trader(&mockBrocker);
+    std::string code = "AAPL";
+    int totalMoney = 12000;
+
+    EXPECT_CALL(mock, getPrice(code))
+        .Times(3)
+        .WillOnce(Return(100))
+        .WillOnce(Return(110))
+        .WillOnce(Return(120));
+
+    EXPECT_CALL(mock, buy(code, 120, 10)).Times(1);
+
+    trader.buyNiceTiming(code, totalMoney);
+}
+
+TEST(APP2, BuyNiceTiming_FAIL) {
+    MockStockBrocker mockBrocker;
+    AutoTrader trader(&mockBrocker);
+    std::string code = "AAPL";
+
+    // 추세 없음 (중간이 높음)
+    EXPECT_CALL(mock, getPrice(code))
+        .Times(3)
+        .WillOnce(Return(100))
+        .WillOnce(Return(150))
+        .WillOnce(Return(120));
+
+    // buy()는 호출되지 않아야 함
+    EXPECT_CALL(mock, buy(testing::_, testing::_, testing::_)).Times(0);
+
+    trader.buyNiceTiming(code, 10000);
+}
+
+TEST(APP2, SellNiceTiming_Success) {
+    MockStockBrocker mockBrocker;
+    AutoTrader trader(&mockBrocker);
+    std::string code = "GOOG";
+    int quantity = 5;
+
+    // getPrice 3번: 하락 추세
+    EXPECT_CALL(mock, getPrice(code))
+        .Times(3)
+        .WillOnce(Return(150))
+        .WillOnce(Return(140))
+        .WillOnce(Return(130));
+
+    EXPECT_CALL(mock, sell(code, 130, quantity)).Times(1);
+
+    trader.sellNiceTiming(code, quantity);
+}
+
+TEST(APP2, SellNiceTiming_FAIL) {
+    MockStockBrocker mockBrocker;
+    AutoTrader trader(&mockBrocker);
+    std::string code = "GOOG";
+
+    // 추세 없음
+    EXPECT_CALL(mock, getPrice(code))
+        .Times(3)
+        .WillOnce(Return(150))
+        .WillOnce(Return(160))
+        .WillOnce(Return(140));
+
+    EXPECT_CALL(mock, sell(testing::_, testing::_, testing::_)).Times(0);
+
+    trader.sellNiceTiming(code, 5);
+}
+
 int main()
 {
 	::testing::InitGoogleMock();
