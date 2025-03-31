@@ -26,7 +26,7 @@ TEST(APP1, Login)
     EXPECT_CALL(mockBrocker, login(testId, testPass))
         .Times(1)
         .WillOnce([&](const std::string& id, const std::string& pass) {
-                std::cout << id << " login success\n";
+        std::cout << id << " login success\n";
             });
 
     std::stringstream buffer;
