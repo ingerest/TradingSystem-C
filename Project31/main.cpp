@@ -77,7 +77,7 @@ TEST(APP1, Sell)
     int count = 100;
     int price = 380000;
 
-    EXPECT_CALL(mockBrocker, buy(stockCode, count, price))
+    EXPECT_CALL(mockBrocker, sell(stockCode, count, price))
         .Times(1)
         .WillOnce([&](const std::string& id, int count, int price) {
         std::cout << stockCode << " : Sell stock ( " << price << " * " << count << ")\n";
@@ -87,12 +87,12 @@ TEST(APP1, Sell)
     std::streambuf* originalCout = std::cout.rdbuf();
     std::cout.rdbuf(buffer.rdbuf());
 
-    //trader.buy;
+    trader.sell(stockCode, count, price);
 
     std::cout.rdbuf(originalCout);
 
     std::string output = buffer.str();
-    EXPECT_NE(output.find("TESLA : Sell stock ( 380000 * 100 )"), std::string::npos);
+    EXPECT_NE(output.find("TESLA : Sell stock ( 380000 * 100)"), std::string::npos);
 }
 
 TEST(APP1, getPrice)
