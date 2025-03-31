@@ -16,7 +16,7 @@ public:
 	{
 		m_pStockBrocker->buy(stockCode, count, price);
 	}
-	void sell(const std::string& stockCode, int count, int price)
+	void sell(const std::string& stockCode, int count, int price) 
 	{
 		m_pStockBrocker->sell(stockCode, count, price);
 	}
