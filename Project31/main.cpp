@@ -55,14 +55,14 @@ TEST(APP1, Buy)
     EXPECT_CALL(mockBrocker, buy(stockCode, count, price))
         .Times(1)
         .WillOnce([&](const std::string& id, int count, int price) {
-             std::cout << stockCode << " : Buy stock ( " << price << " * " << count << ")\n";
+             std::cout << stockCode << " : Buy stock ( " << price << " * " << count << " )\n";
             });
 
     std::stringstream buffer;
     std::streambuf* originalCout = std::cout.rdbuf();
     std::cout.rdbuf(buffer.rdbuf());
 
-    //trader.buy;
+    trader.buy(stockCode, count, price);
 
     std::cout.rdbuf(originalCout);
 
